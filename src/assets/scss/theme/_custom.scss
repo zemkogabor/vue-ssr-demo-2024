@@ -1,0 +1,25 @@
+// Egyedi színek, világos témához
+[data-bs-theme="light"] {
+  --required-input: #fff8ea
+}
+
+// Egyedi színek, sötét témához
+[data-bs-theme="dark"] {
+  --required-input: #2f2c27
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// Egyenlő szélességű oszlopokhoz, bootstrap-be sajnos nincs beépített class erre.
+// https://stackoverflow.com/questions/51775461/why-is-flex-fill-not-creating-equal-width-in-bootstrap
+.flex-even {
+  flex: 1 0 0 !important;
+}
+
+select, input, textarea {
+  &:required {
+    background-color: var(--required-input);
+  }
+}

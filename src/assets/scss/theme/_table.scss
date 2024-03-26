@@ -1,0 +1,7 @@
+.table-nowrap th, .table-nowrap td {
+  white-space: nowrap;
+}
+
+.table thead th {
+  background-color: var(--bs-light-bg-subtle);
+}

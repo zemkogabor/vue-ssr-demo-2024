@@ -1,0 +1,15 @@
+// Import font
+@import '@fontsource/roboto/latin-300.css';
+@import '@fontsource/roboto/latin-400.css';
+@import '@fontsource/roboto/latin-500.css';
+@import '@fontsource/roboto/latin-700.css';
+
+@import 'theme/variables';
+@import 'theme/color-utils';
+@import 'theme/form';
+@import 'theme/table';
+@import 'theme/custom';
+
+// Import boostrap core
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';

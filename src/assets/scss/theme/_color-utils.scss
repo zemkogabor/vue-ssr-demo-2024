@@ -1,0 +1,72 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import "bootstrap/scss/variables-dark";
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+$all-colors: map-merge-multiple($blues, $indigos, $purples, $pinks, $reds, $oranges, $yellows, $greens, $teals, $cyans);
+
+// Ennek hatására további színek is a témába lesznek, tehát fog hozzá generálni változót, pl.: "--var(bs-red-100)"
+// https://getbootstrap.com/docs/5.3/customize/color/#color-sass-maps
+// https://stackoverflow.com/questions/71374485/bootstrap-v5-1-3-merge-colors-with-theme-colors-map
+$theme-colors: map-merge-multiple($theme-colors, $reds, $blues, $yellows, $pinks);
+
+// Generate all ".text-{color}-{level}" classes
+// https://getbootstrap.com/docs/5.2/customize/color/#generating-utilities
+$utilities: map-merge(
+    $utilities,
+    (
+      "color": map-merge(
+          map-get($utilities, "color"),
+          (
+            values: map-merge(
+                map-get(map-get($utilities, "color"), "values"),
+                  (
+                    $all-colors
+                  ),
+            ),
+          ),
+      ),
+    )
+);
+
+// Generate all ".bg-{color}-{level}" classes
+// https://getbootstrap.com/docs/5.2/customize/color/#generating-utilities
+$utilities: map-merge(
+    $utilities,
+    (
+      "background-color": map-merge(
+          map-get($utilities, "background-color"),
+          (
+            values: map-merge(
+                map-get(map-get($utilities, "background-color"), "values"),
+                  (
+                    $all-colors
+                  ),
+            ),
+          ),
+      ),
+    )
+);
+
+// Generate all ".border-{color}-{level}" classes
+// https://getbootstrap.com/docs/5.2/customize/color/#generating-utilities
+$utilities: map-merge(
+    $utilities,
+    (
+      "border-color": map-merge(
+          map-get($utilities, "border-color"),
+          (
+            values: map-merge(
+                map-get(map-get($utilities, "border-color"), "values"),
+                  (
+                    $all-colors
+                  ),
+            ),
+          ),
+      ),
+    )
+);
+
+@import 'bootstrap/scss/utilities/api';

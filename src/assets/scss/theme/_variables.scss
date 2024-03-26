@@ -1,0 +1,95 @@
+// Colors
+$primary: #0370b6;
+$success: #008056;
+$warning: #fdc65a;
+$dark: #2b2828;
+$info: #5e4c7d;
+
+// Font
+
+$font-size-base: 1rem;
+
+// Spacers
+
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: ($spacer * .25),
+  2: ($spacer * .5),
+  3: ($spacer * .75),
+  4: $spacer,
+  5: ($spacer * 1.5),
+  6: ($spacer * 2),
+  7: ($spacer * 2.5),
+  8: ($spacer * 3),
+  9: ($spacer * 4),
+  10: ($spacer * 5),
+  11: ($spacer * 6),
+  12: ($spacer * 7),
+  13: ($spacer * 8),
+  14: ($spacer * 9),
+  15: ($spacer * 10),
+);
+
+// Border
+
+$border-radius: .5rem;
+
+// Input btn focus
+
+$input-btn-focus-width: 0;
+$input-btn-focus-color: transparent;
+$input-btn-focus-box-shadow: none;
+
+// Input focus
+
+$input-focus-bg: none;
+$input-focus-box-shadow: none;
+$input-border-radius: 0.25rem;
+
+// Form
+
+$form-label-font-size: 85%;
+$form-label-margin-bottom: 0;
+$form-feedback-margin-top: $form-label-margin-bottom;
+$form-feedback-font-size: $form-label-font-size;
+
+// Nav tabs
+$nav-tabs-link-hover-border-color: transparent;
+
+// Button
+
+$btn-font-weight: 500;
+
+$input-btn-font-size: $font-size-base;
+$input-btn-font-size-sm: .75rem;
+$input-btn-padding-y: .3rem;
+$input-btn-padding-x: .7rem;
+$input-btn-padding-y-sm: .2rem;
+$input-btn-padding-x-sm: .5rem;
+
+// Badge
+$badge-border-radius: 0.75rem;
+
+// Enable negative margins
+$enable-negative-margins: true;
+
+// Font
+$font-family-sans-serif: 'Roboto', sans-serif;
+
+// Nav
+$nav-link-font-size: 1rem;
+$nav-link-font-weight: 300;
+// Importálni nem lehet scss változókat, mert akkor nem működne a felülírás (a felülírás meg kell hogy előzze az importot), ezért a kiszámított css változót használom:
+$navbar-light-color: var(--bs-dark); // Az alap halvány szürke olyan mintha ki lenne kapcsolva
+$navbar-light-hover-color: var(--bs-pink-400);
+$navbar-light-active-color: var(--bs-pink-500);
+
+// Spinner
+$spinner-width-sm: .8rem;
+$spinner-height-sm: $spinner-width-sm;
+
+// Breadcrumb
+$breadcrumb-divider-color: var(--bs-gray-200);
+$breadcrumb-font-size: 95%;
+$breadcrumb-divider: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8'><path d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/></svg>");
