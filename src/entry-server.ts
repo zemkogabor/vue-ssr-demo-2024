@@ -6,11 +6,19 @@ import type { PageContext } from '@/types/pageContext'
 import { PAGE_CONTEXT_HTML_ID, TITLE_SUFFIX } from '@/constants'
 import type { SSRContext } from '@vue/server-renderer'
 
-interface Manifest {
+export interface Manifest {
   [key: string]: string[];
 }
 
-export async function render(url: string, manifest: Manifest) {
+export interface RenderResult {
+  title: string;
+  html: string;
+  preloadLinks: string;
+  preloadScripts: string;
+  statusCode: number;
+}
+
+export async function render(url: string, manifest: Manifest): Promise<RenderResult> {
   const pageContext = {} as PageContext
   const { app, router } = createApp(pageContext)
 
@@ -31,7 +39,13 @@ export async function render(url: string, manifest: Manifest) {
   const preloadScripts = renderPreloadScripts(pageContext)
   const statusCode = pageContext.statusCode || 200
 
-  return [title, html, preloadLinks, preloadScripts, statusCode]
+  return {
+    title,
+    html,
+    preloadLinks,
+    preloadScripts,
+    statusCode,
+  }
 }
 
 /**

@@ -27,7 +27,7 @@ export default defineComponent({
   computed: {
     pageNames() {
       return pageNames
-    }
+    },
   },
   components: {
     RouterView,
