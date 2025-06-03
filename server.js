@@ -1,17 +1,13 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import express, { type Express, type Request, type Response, type RequestHandler } from 'express'
-import type { RenderResult, Manifest } from './src/entry-server'
-
-const isTest = process.env.VITEST
+import express from 'express'
 
 export async function createServer(
   root = process.cwd(),
   isProd = process.env.NODE_ENV === 'production',
-  hmrPort?: number,
+  hmrPort,
 ) {
-  // @ts-expect-error: import.meta.url létezik
   const __dirname = path.dirname(fileURLToPath(import.meta.url))
   const resolve = (p) => path.resolve(__dirname, p)
 
@@ -21,7 +17,7 @@ export async function createServer(
     )
     : {}
 
-  const app : Express = express()
+  const app = express()
 
   /**
    * @type {import('vite').ViteDevServer}
@@ -33,7 +29,7 @@ export async function createServer(
     ).createServer({
       base: process.env.BASE_URL,
       root,
-      logLevel: isTest ? 'error' : 'info',
+      logLevel: 'error',
       server: {
         middlewareMode: true,
         watch: {
@@ -48,7 +44,7 @@ export async function createServer(
     })
     app.use(vite.middlewares)
   } else {
-    const compression = (await import('compression')).default as () => RequestHandler
+    const compression = (await import('compression')).default
     app.use(compression())
     app.use(
       '/',
@@ -58,12 +54,12 @@ export async function createServer(
     )
   }
 
-  app.use(async (req: Request, res: Response) => {
+  app.use(async (req, res) => {
     try {
       const url = req.originalUrl
 
-      let template: string
-      let render: (url: string, manifest: Manifest) => Promise<RenderResult>
+      let template
+      let render
 
       if (!isProd) {
         template = fs.readFileSync(resolve('index.html'), 'utf-8')
@@ -71,7 +67,6 @@ export async function createServer(
         render = (await vite.ssrLoadModule('/src/entry-server.ts')).render
       } else {
         template = fs.readFileSync(resolve('dist/client/index.html'), 'utf-8')
-        // @ts-expect-error: Built file, no type declaration
         render = (await import('./dist/server/entry-server.js')).render
       }
 
@@ -98,10 +93,8 @@ export async function createServer(
   return { app, vite }
 }
 
-if (!isTest) {
-  createServer().then(({ app }) =>
-    app.listen(6173, () => {
-      console.log('http://localhost:6173')
-    }),
-  )
-}
+createServer().then(({ app }) =>
+  app.listen(6173, () => {
+    console.log('http://localhost:6173')
+  }),
+)
